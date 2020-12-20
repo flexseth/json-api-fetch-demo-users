@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Api Fetch Demo - Users from JSON Placeholder</title>
+</head>
+<body>
+    
+    <h1>Here's the demo we've all been waiting for...</h1>
+    <p>with literally no style, and <em>weighing in at ...</em></p>
+    <hr>
+
+    <button id="fetchUserDataBtn" onclick="fetchUserData">Fetch User Data</button>
+
+    <div id="response"></div>
+
+    <script>
+        document.getElementById('fetchUserDataBtn')
+        .addEventListener('click', fetchUserData);
+
+        function fetchUserData() {
+            fetch('https://jsonplaceholder.typicode.com/users/')
+            .then( response => response.json() )
+            //.then( json => console.log(json) )
+            .then( users => {
+                let output = '<h2>List of users</h2>'
+                output += '<ul>'
+                users.forEach( (user) => {
+                    output += `<li>${user.name}</li>`
+                });
+                output += '</ul>'
+                document.getElementById("response").innerHTML = output
+            });
+        }
+    </script>
+
+    <footer>Inspired by <a href="https://codingthesmartway.com/fetch-api-introduction-to-promised-based-data-fetching-in-plain-javascript/" nofollow></a></footer>
+</body>
+</html>
